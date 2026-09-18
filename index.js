@@ -1,7 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const fs = require('fs');
 require('dotenv').config();
+
+// Ensure uploads directory exists
+if (!fs.existsSync('uploads')) {
+  fs.mkdirSync('uploads');
+}
 
 const mealRoutes = require('./routes/mealRoutes');
 const progressRoutes = require('./routes/progressRoutes');
