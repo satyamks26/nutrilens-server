@@ -112,8 +112,9 @@ const classifyImage = async (imageFile, recentHistory) => {
 
   try {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    // Use gemini-2.5-flash based on the available models for this key
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+    // Use gemini-3.6-flash or environment-configured model
+    const modelName = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
+    const model = genAI.getGenerativeModel({ model: modelName });
     
     // Ensure the image is JPEG using sharp to support avif, heic, webp, etc.
     const tempConvertedPath = path.join('uploads', `converted-${Date.now()}.jpg`);
